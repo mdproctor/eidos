@@ -43,13 +43,12 @@ public class InMemoryDispositionSignalStore implements DispositionSignalStore {
     public void decay(final String agentId, final String tenancyId,
                       final double decayFactor) {
         final var functions = store.get(key(agentId, tenancyId));
-        if (functions == null) return;
+        if (functions == null) {return;}
         functions.forEach((term, count) -> {
-            final int newCount = (int) (count.get() * (1 - decayFactor));
+            final int newCount = (int) (count.get() * decayFactor);
             count.set(newCount);
         });
-        functions.entrySet().removeIf(e -> e.getValue().get() <= 0);
-    }
+        functions.entrySet().removeIf(e -> e.getValue().get() <= 0);}
 
     @Override
     public void clear(final String agentId, final String tenancyId) {

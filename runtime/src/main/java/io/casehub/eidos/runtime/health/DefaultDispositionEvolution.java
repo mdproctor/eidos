@@ -3,10 +3,12 @@ package io.casehub.eidos.runtime.health;
 import io.casehub.eidos.api.AgentDescriptor;
 import io.casehub.eidos.api.DispositionEvolution;
 import io.casehub.eidos.api.DispositionHealth.DispositionStatus;
-import io.casehub.eidos.api.DispositionSignalStore;
 import io.casehub.eidos.api.DispositionValue;
-import io.casehub.eidos.api.VocabularyRegistry;
+import io.casehub.eidos.runtime.preferences.DispositionPreferenceKeys;
+import io.casehub.platform.api.preferences.PreferenceProvider;
+import io.casehub.platform.api.preferences.SettingsScope;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
@@ -18,16 +20,11 @@ public class DefaultDispositionEvolution implements DispositionEvolution {
 
     static final double DEFAULT_DOMINANT_WEIGHT = 0.35;
     static final double DEFAULT_AUXILIARY_WEIGHT = 0.20;
-    static final double DEFAULT_DECAY_FACTOR = 0.20;
-
-    private final DispositionSignalStore signalStore;
-    private final VocabularyRegistry vocabRegistry;
+    private final Instance<PreferenceProvider> preferenceProviderInstance;
 
     @Inject
-    public DefaultDispositionEvolution(final DispositionSignalStore signalStore,
-                                       final VocabularyRegistry vocabRegistry) {
-        this.signalStore = signalStore;
-        this.vocabRegistry = vocabRegistry;
+    public DefaultDispositionEvolution(final Instance<PreferenceProvider> preferenceProviderInstance) {
+        this.preferenceProviderInstance = preferenceProviderInstance;
     }
 
     @Override
@@ -35,7 +32,7 @@ public class DefaultDispositionEvolution implements DispositionEvolution {
                                     final DispositionStatus.EvolutionPending pending) {
         final var profile = descriptor.disposition().dispositionProfile();
         if (profile == null || profile.isEmpty()) {
-            return new EvolutionResult.Dampened(DEFAULT_DECAY_FACTOR);
+            return new EvolutionResult.Dampened(decayFactor(descriptor.tenancyId()));
         }
 
         final var sorted = profile.stream()
@@ -52,7 +49,7 @@ public class DefaultDispositionEvolution implements DispositionEvolution {
         };
 
         if (newProfile == null) {
-            return new EvolutionResult.Dampened(DEFAULT_DECAY_FACTOR);
+            return new EvolutionResult.Dampened(decayFactor(descriptor.tenancyId()));
         }
 
         final var normalizedProfile = normalize(newProfile);
@@ -61,9 +58,16 @@ public class DefaultDispositionEvolution implements DispositionEvolution {
                 .toList();
         final String newLabel = typeLabel(newSorted);
 
-        signalStore.decay(descriptor.agentId(), descriptor.tenancyId(), DEFAULT_DECAY_FACTOR);
-
         return new EvolutionResult.Evolved(normalizedProfile, previousLabel, newLabel);
+    }
+
+    private double decayFactor(final String tenancyId) {
+        if (preferenceProviderInstance.isUnsatisfied()) {
+            return DispositionPreferenceKeys.DECAY_FACTOR.defaultValue().value();
+        }
+        return preferenceProviderInstance.get()
+                .resolve(SettingsScope.root(tenancyId))
+                .getOrDefault(DispositionPreferenceKeys.DECAY_FACTOR).value();
     }
 
     private List<DispositionValue> applySwap(final List<DispositionValue> sorted,

@@ -56,27 +56,26 @@ public class JpaDispositionSignalStore implements DispositionSignalStore {
     public void decay(final String agentId, final String tenancyId,
                       final double decayFactor) {
         final var results = em.createQuery(
-                "SELECT e FROM DispositionSignalEntity e"
-                    + " WHERE e.id.agentId = :agentId"
-                    + " AND e.id.tenancyId = :tenancyId",
-                DispositionSignalEntity.class)
-            .setParameter("agentId", agentId)
-            .setParameter("tenancyId", tenancyId)
-            .getResultList();
+                                      "SELECT e FROM DispositionSignalEntity e"
+                                      + " WHERE e.id.agentId = :agentId"
+                                      + " AND e.id.tenancyId = :tenancyId",
+                                      DispositionSignalEntity.class)
+                              .setParameter("agentId", agentId)
+                              .setParameter("tenancyId", tenancyId)
+                              .getResultList();
 
         for (final var e : results) {
-            e.count = (int) (e.count * (1 - decayFactor));
+            e.count = (int) (e.count * decayFactor);
         }
 
         em.createQuery(
-                "DELETE FROM DispositionSignalEntity e"
-                    + " WHERE e.id.agentId = :agentId"
-                    + " AND e.id.tenancyId = :tenancyId"
-                    + " AND e.count <= 0")
-            .setParameter("agentId", agentId)
-            .setParameter("tenancyId", tenancyId)
-            .executeUpdate();
-    }
+                  "DELETE FROM DispositionSignalEntity e"
+                  + " WHERE e.id.agentId = :agentId"
+                  + " AND e.id.tenancyId = :tenancyId"
+                  + " AND e.count <= 0")
+          .setParameter("agentId", agentId)
+          .setParameter("tenancyId", tenancyId)
+          .executeUpdate();}
 
     @Override
     @Transactional

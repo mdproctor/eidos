@@ -213,9 +213,9 @@ class DefaultDispositionEvolutionTest {
     }
 
     @Test
-    void signals_decayed_after_evolution() {
+    void signals_unchanged_after_evolution() {
         var descriptor = agentWithProfile(testProfile());
-        for (int i = 0; i < 5; i++) signalStore.recordActivation("a1", "t1", "f2");
+        for (int i = 0; i < 5; i++) {signalStore.recordActivation("a1", "t1", "f2");}
 
         var pending = new DispositionStatus.EvolutionPending(
                 DefaultDispositionHealth.DOMINANT_AUXILIARY_SWAP,
@@ -224,8 +224,8 @@ class DefaultDispositionEvolutionTest {
 
         evolution.evaluate(descriptor, pending);
 
-        var counts = signalStore.activationCounts("a1", "t1");
+        var counts  = signalStore.activationCounts("a1", "t1");
         int f2Count = counts.getOrDefault("f2", 0);
-        assertThat(f2Count).isLessThan(5);
+        assertThat(f2Count).isEqualTo(5);
     }
 }
