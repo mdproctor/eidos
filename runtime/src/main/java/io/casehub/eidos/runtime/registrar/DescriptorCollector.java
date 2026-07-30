@@ -1,11 +1,20 @@
 package io.casehub.eidos.runtime.registrar;
 
-import io.casehub.eidos.api.*;
+import io.casehub.eidos.api.AgentDescriptor;
+import io.casehub.eidos.api.AgentDisposition;
+import io.casehub.eidos.api.DispositionAxis;
+import io.casehub.eidos.api.DispositionValue;
+import io.casehub.eidos.api.TemplateRegistry;
+import io.casehub.eidos.api.VocabularyRegistry;
 import io.casehub.eidos.api.spi.AgentDescriptorRegistrar;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-final class DescriptorCollector {
+public final class DescriptorCollector {
 
     private DescriptorCollector() {}
 
@@ -52,11 +61,11 @@ final class DescriptorCollector {
         return List.copyOf(result);
     }
 
-    static AgentDescriptor deriveDispositionAxes(AgentDescriptor descriptor,
-                                                 VocabularyRegistry vocabRegistry) {
-        if (descriptor.disposition() == null) return descriptor;
+    public static AgentDescriptor deriveDispositionAxes(AgentDescriptor descriptor,
+                                                        VocabularyRegistry vocabRegistry) {
+        if (descriptor.disposition() == null) {return descriptor;}
         var profile = descriptor.disposition().dispositionProfile();
-        if (profile == null || profile.isEmpty()) return descriptor;
+        if (profile == null || profile.isEmpty()) {return descriptor;}
 
         String vocabUri = descriptor.dispositionVocabulary();
         if (vocabUri == null || vocabUri.isBlank()) {
