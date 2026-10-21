@@ -24,6 +24,8 @@
 
 ### `dataHandlingPolicy` (`java.lang.String`)
 
+### `description` (`java.lang.String`)
+
 ### `disposition` (`io.casehub.eidos.api.AgentDisposition`)
 
 ### `dispositionVocabulary` (`java.lang.String`)
@@ -82,6 +84,8 @@
 
 ### `dataHandlingPolicy` (`java.lang.String`)
 
+### `description` (`java.lang.String`)
+
 ### `disposition` (`io.casehub.eidos.api.AgentDisposition`)
 
 ### `dispositionVocabulary` (`java.lang.String`)
@@ -122,12 +126,13 @@
 
 ## Constructors
 
-### `public AgentDescriptor(java.lang.String agentId, java.lang.String name, java.lang.String version, java.lang.String provider, java.lang.String modelFamily, java.lang.String modelVersion, java.lang.String weightsFingerprint, java.lang.String domainVocabulary, java.lang.String slotVocabulary, java.lang.String dispositionVocabulary, java.lang.String styleVocabulary, java.util.Map<io.casehub.eidos.api.DispositionAxis,java.lang.String> axisVocabularies, java.lang.String slot, java.lang.String archetype, java.util.List<java.lang.String> archetypeAdjectives, java.lang.String avatar, java.util.List<io.casehub.eidos.api.AgentCapability> capabilities, io.casehub.eidos.api.AgentDisposition disposition, java.lang.String jurisdiction, java.lang.String dataHandlingPolicy, java.lang.String tenancyId, java.lang.String briefing, io.casehub.eidos.api.AgentVoiceProfile voice, java.util.List<io.casehub.eidos.api.TemplateRef> templates, java.util.List<io.casehub.eidos.api.AgentGoal> goals, java.util.List<io.casehub.eidos.api.AgentConstraint> constraints, java.util.List<io.casehub.eidos.api.ProviderConfig> providerConfigs, java.util.Map<java.lang.String,java.lang.Object> extensionData)`
+### `public AgentDescriptor(java.lang.String agentId, java.lang.String name, java.lang.String description, java.lang.String version, java.lang.String provider, java.lang.String modelFamily, java.lang.String modelVersion, java.lang.String weightsFingerprint, java.lang.String domainVocabulary, java.lang.String slotVocabulary, java.lang.String dispositionVocabulary, java.lang.String styleVocabulary, java.util.Map<io.casehub.eidos.api.DispositionAxis,java.lang.String> axisVocabularies, java.lang.String slot, java.lang.String archetype, java.util.List<java.lang.String> archetypeAdjectives, java.lang.String avatar, java.util.List<io.casehub.eidos.api.AgentCapability> capabilities, io.casehub.eidos.api.AgentDisposition disposition, java.lang.String jurisdiction, java.lang.String dataHandlingPolicy, java.lang.String tenancyId, java.lang.String briefing, io.casehub.eidos.api.AgentVoiceProfile voice, java.util.List<io.casehub.eidos.api.TemplateRef> templates, java.util.List<io.casehub.eidos.api.AgentGoal> goals, java.util.List<io.casehub.eidos.api.AgentConstraint> constraints, java.util.List<io.casehub.eidos.api.ProviderConfig> providerConfigs, java.util.Map<java.lang.String,java.lang.Object> extensionData)`
 
 #### Parameters
 
 - `agentId` (`java.lang.String`)
 - `name` (`java.lang.String`)
+- `description` (`java.lang.String`)
 - `version` (`java.lang.String`)
 - `provider` (`java.lang.String`)
 - `modelFamily` (`java.lang.String`)
@@ -176,6 +181,8 @@
 ### `public java.util.List<io.casehub.eidos.api.AgentConstraint> constraints()`
 
 ### `public java.lang.String dataHandlingPolicy()`
+
+### `public java.lang.String description()`
 
 ### `public io.casehub.eidos.api.AgentDisposition disposition()`
 

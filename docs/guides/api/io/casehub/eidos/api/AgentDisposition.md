@@ -14,6 +14,10 @@
 
 ### `dispositionProfile` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
 
+### `enneagramType` (`java.lang.String`)
+
+### `mbtiType` (`java.lang.String`)
+
 ### `riskAppetite` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
 
 ### `ruleFollowing` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
@@ -32,6 +36,10 @@
 
 ### `dispositionProfile` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
 
+### `enneagramType` (`java.lang.String`)
+
+### `mbtiType` (`java.lang.String`)
+
 ### `riskAppetite` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
 
 ### `ruleFollowing` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
@@ -42,7 +50,7 @@
 
 ## Constructors
 
-### `public AgentDisposition(java.util.List<io.casehub.eidos.api.DispositionValue> socialOrient, java.util.List<io.casehub.eidos.api.DispositionValue> ruleFollowing, java.util.List<io.casehub.eidos.api.DispositionValue> riskAppetite, java.util.List<io.casehub.eidos.api.DispositionValue> autonomy, java.util.List<io.casehub.eidos.api.DispositionValue> conflictMode, boolean delegation, java.util.List<io.casehub.eidos.api.DispositionValue> dispositionProfile, java.util.List<io.casehub.eidos.api.DispositionValue> styleProfile)`
+### `public AgentDisposition(java.util.List<io.casehub.eidos.api.DispositionValue> socialOrient, java.util.List<io.casehub.eidos.api.DispositionValue> ruleFollowing, java.util.List<io.casehub.eidos.api.DispositionValue> riskAppetite, java.util.List<io.casehub.eidos.api.DispositionValue> autonomy, java.util.List<io.casehub.eidos.api.DispositionValue> conflictMode, boolean delegation, java.util.List<io.casehub.eidos.api.DispositionValue> dispositionProfile, java.util.List<io.casehub.eidos.api.DispositionValue> styleProfile, java.lang.String mbtiType, java.lang.String enneagramType)`
 
 #### Parameters
 
@@ -54,6 +62,8 @@
 - `delegation` (`boolean`)
 - `dispositionProfile` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
 - `styleProfile` (`java.util.List<io.casehub.eidos.api.DispositionValue>`)
+- `mbtiType` (`java.lang.String`)
+- `enneagramType` (`java.lang.String`)
 
 ## Methods
 
@@ -66,6 +76,8 @@
 ### `public boolean delegation()`
 
 ### `public java.util.List<io.casehub.eidos.api.DispositionValue> dispositionProfile()`
+
+### `public java.lang.String enneagramType()`
 
 ### `public final boolean equals(java.lang.Object o)`
 
@@ -80,6 +92,8 @@
 - `axis` (`io.casehub.eidos.api.DispositionAxis`)
 
 ### `public final int hashCode()`
+
+### `public java.lang.String mbtiType()`
 
 ### `public java.lang.String primaryTerm(io.casehub.eidos.api.DispositionAxis axis)`
 
