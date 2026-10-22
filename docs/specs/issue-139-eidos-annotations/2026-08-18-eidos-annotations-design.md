@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-18
 **Issue:** casehubio/eidos#139
-**Epic:** casehubio/blocks#115 (annotation-driven agent programming model)
+**Epic:** casehubio/agency#115 (annotation-driven agent programming model)
 **Status:** Draft
 
 ## Motivation
@@ -23,7 +23,7 @@ This is part of the platform-wide annotation-driven programming model (blocks#11
 
 ### Four build extensions, not three
 
-The blocks#115 spec shows three build extensions (LC4j, Engine, Blocks). This design adds a fourth — the eidos build extension — to avoid a layering problem: apps that want `@Identity` should not need `casehub-blocks` on the classpath.
+The blocks#115 spec shows three build extensions (LC4j, Engine, Blocks). This design adds a fourth — the eidos build extension — to avoid a layering problem: apps that want `@Identity` should not need `casehub-agency` on the classpath.
 
 ```
 LC4j Extension     Engine Ext     Eidos Ext        Blocks Ext
@@ -73,7 +73,7 @@ casehub-eidos-annotations-deployment/ ← NEW deployment module
 
 ### Build extension coordination
 
-When both `casehub-eidos-annotations` and `casehub-blocks` are on the classpath, both build extensions would otherwise generate `AgentDescriptor` beans from `@Identity`, causing duplicate `(agentId, tenancyId)` failures at startup.
+When both `casehub-eidos-annotations` and `casehub-agency` are on the classpath, both build extensions would otherwise generate `AgentDescriptor` beans from `@Identity`, causing duplicate `(agentId, tenancyId)` failures at startup.
 
 **Protocol:** `EidosAnnotationsProcessor` produces an `EidosAnnotationProcessedBuildItem` listing all `@Identity`-annotated class names it has processed. The blocks build extension `@Consume`s this build item and skips `AgentDescriptor` generation for any class already in the processed set. When `casehub-eidos-annotations` is NOT on the classpath, the build item is absent and blocks generates descriptors itself (backward compatible).
 

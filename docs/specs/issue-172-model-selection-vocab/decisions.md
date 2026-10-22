@@ -7,7 +7,7 @@
 - Eidos owns a ModelSelector SPI consuming ModelRegistry — creates platform→eidos→platform dependency cycle, blocks CBR composition via RoutingSignalAssembler
 **Rationale:** Follows existing boundary rules (platform#285 layer model). Dependency flows one way: platform reads eidos descriptors, resolves models from its own registry. CBR (blocks#270) composes via RoutingSignalAssembler at the platform layer without reaching into eidos.
 **Trade-offs:** Eidos has no runtime visibility into which model was actually selected — it only declares requirements. Selection telemetry lives in the platform.
-**Sources:** casehubio/platform#285 (layer model), casehubio/blocks#270 (CBR routing), AgentDescriptor.java (existing modelFamily/modelVersion fields), RoutingAgentProvider (platform)
+**Sources:** casehubio/platform#285 (layer model), casehubio/agency#270 (CBR routing), AgentDescriptor.java (existing modelFamily/modelVersion fields), RoutingAgentProvider (platform)
 **Exploration:** quick
 **Status:** captured
 
@@ -19,7 +19,7 @@
 - Both (descriptor default + per-capability override) — adds complexity without a real use case; capability IS the requirement
 **Rationale:** AgentCapability is already the unit of operational metadata (qualityHint, latencyHintP50Ms, costHint, epistemicDomains). Model tier is another operational dimension. CBR feedback (blocks#270) scores by (agentId, modelId, capabilityName) — per-capability requirements give it a natural grouping key.
 **Trade-offs:** An agent with 5 capabilities each needing FLAGSHIP must declare it 5 times. No descriptor-level default means no shorthand. Acceptable because explicit is better than implicit for routing-critical metadata.
-**Sources:** AgentCapability.java (existing per-capability fields), casehubio/blocks#270 (CBR scoring key)
+**Sources:** AgentCapability.java (existing per-capability fields), casehubio/agency#270 (CBR scoring key)
 **Exploration:** quick
 **Status:** captured
 

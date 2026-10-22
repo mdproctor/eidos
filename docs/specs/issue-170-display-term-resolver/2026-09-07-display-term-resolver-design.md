@@ -187,5 +187,5 @@ Test infrastructure: register test vocabulary enums with `VocabularyRegistry` in
 - `CdiVocabularyRegistry.java:418-422` — resolve implementation (byUri → byClass index)
 - `CdiVocabularyRegistry.java:431-438` — equivalentValues implementation
 - casehubio/platform#283 — eventual platform-api home
-- casehubio/blocks-ui#157 — org diagram consumer (primary motivating use case)
+- casehubio/agency-ui#157 — org diagram consumer (primary motivating use case)
 - D1-D5 decision records (`decisions.md`)

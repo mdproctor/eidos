@@ -276,4 +276,4 @@ Engine invokes via RoutingAgentProvider:
 - `docs/protocols/renderer/capability-metadata-rendering.md` — routing signals render in A2A_CARD only
 - `docs/protocols/renderer/a2a-structural-assembly-hash-coverage.md` — hash coverage protocol
 - casehubio/platform#285 — LLM model registry epic (upstream)
-- casehubio/blocks#270 — CBR model routing integration
+- casehubio/agency#270 — CBR model routing integration

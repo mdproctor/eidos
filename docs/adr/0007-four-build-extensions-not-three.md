@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-18
 **Status:** Accepted
-**Context:** casehubio/eidos#139, casehubio/blocks#115
+**Context:** casehubio/eidos#139, casehubio/agency#115
 
 ## Decision
 
@@ -12,7 +12,7 @@ This means four build extensions in the annotation-driven model (LC4j, Engine, E
 
 ## Context
 
-The blocks#115 spec (§Build Extension Architecture) envisioned three build extensions with the blocks extension processing eidos annotations (`@Identity`, `@Disposition`, etc.) as part of cross-module composition. This creates a layering problem: any app that wants `@Identity` on an agent class would need `casehub-blocks` on the classpath — even if it doesn't use debate, voting, HTN, or any blocks pattern.
+The blocks#115 spec (§Build Extension Architecture) envisioned three build extensions with the blocks extension processing eidos annotations (`@Identity`, `@Disposition`, etc.) as part of cross-module composition. This creates a layering problem: any app that wants `@Identity` on an agent class would need `casehub-agency` on the classpath — even if it doesn't use debate, voting, HTN, or any blocks pattern.
 
 ## Alternatives Considered
 
@@ -26,6 +26,6 @@ The blocks#115 spec (§Build Extension Architecture) envisioned three build exte
 
 ## Consequences
 
-- Apps using only eidos identity annotations need `casehub-eidos-annotations`, not `casehub-blocks`
+- Apps using only eidos identity annotations need `casehub-eidos-annotations`, not `casehub-agency`
 - Two new Maven modules per repo that adopts this pattern (runtime + deployment)
 - `@Discoverable` lives in `casehub-eidos-api` (pure marker, no enum dependencies) so both extensions can see it without circular dependencies
